@@ -1,1 +1,2 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/hLqvXyMi)
+# Sports Lending Catalog Web Application
+This repository contains the contents for a Sports Lending Catalog project. It was in collaboration with 4 other students in UVA's CS3240 during the Spring 2025 semester. The application allows users to rent equipment, following a patron and librarian system.
