@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Manage Collection Requests</h1>
+
+    <div class="row">
+        {% for request in object_list %}
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ request.collection.collection_name }}</h5>
+                    <p class="card-text">User requesting access: {{ request.user.username }}</p>
+                    <form method="post" action="{% url 'productCollections:collection_approve' request.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">Approve</button>
+                    </form>
+                    <form method="post" action="{% url 'productCollections:collection_deny' request.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Deny</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No collection requests available.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

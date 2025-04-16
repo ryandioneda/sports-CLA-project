@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>My Borrowed Items</h2>
+    {% if rentals %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Equipment</th>
+                <th>Date of Rental</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rental in rentals %}
+            <tr>
+                <td>
+                    <a href="{% url 'products:product_detail' rental.equipment.pk %}">
+                        {{ rental.equipment.name }}
+                    </a>
+                </td>
+                <td>{{ rental.rental_date|date:"Y-m-d H:i" }}</td>
+                <td>{{ rental.due_date|date:"Y-m-d H:i" }}</td>
+            <td>
+                    <form action="{% url 'products:return_rental' rental.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-sm">Return</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>You currently have no active rentals.</p>
+    {% endif %}
+</div>
+{% endblock %}

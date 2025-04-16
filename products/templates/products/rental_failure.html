@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Rental Failed</h1>
+    <p>You have failed to rent {{ equipment.name }}</p>
+
+    <a href="{% url 'products:product_catalog'}">Go back</a>
+</div>
+{% endblock %}

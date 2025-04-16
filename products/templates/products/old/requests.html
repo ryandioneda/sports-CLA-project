@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body">
+                    <h2 class="card-title text-primary fw-bold">{{ equipment.name }}</h2>
+                    <h5 class="text-muted">{{ equipment.brand }}</h5>
+                    <p class="card-text mt-3">{{ equipment.location }}</p>
+
+                    <p class="card-text mt-3">{{ equipment.description }}</p>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Category:</strong> 
+                            <span class="badge bg-info text-dark">{{ equipment.get_category_display }}</span>
+                        </li>
+                        <li class="list-group-item"><strong>Condition:</strong> 
+                            <span class="badge bg-success">{{ equipment.get_condition_display }}</span>
+                        </li>
+
+                        <li class="list-group-item"><strong>Status:</strong> 
+                            <span class="badge bg-success">{{ equipment.get_status_display }}</span>
+                        </li>
+                        <li class="list-group-item"><strong>Price per day:</strong> 
+                            <span class="fw-bold text-danger">${{ equipment.price_per_day }}</span>
+                        </li>
+                    </ul>
+
+
+                    <!-- SHOW REQUESTS -->
+                     <h1>Rental Requests for {{ object.name }}</h1>
+
+                     {% if rental_requests %}
+                        <ul>
+                            {% for rental in rental_requests %}
+                                <li>
+                                    {{ rental.user.username }} - Rented on {{ rental.rental_date }}
+                                    {% if rental.active %}
+                                        <strong>(Currently Renting)</strong>
+                                    {% else %}
+                                        <span>(Returned on {{rental.return_date }})</span>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No rental requests found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

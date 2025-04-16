@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="a17-header">
+    <h1>Welcome to A17 Sports</h1>
+    <h2>The ultimate place for borrowing sports equipment</h2>
+</div>
+
+<body>
+    <div class="marketing-carousel-wrapper">
+        <div id="marketingCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div style="font-size: 100px;">&#127936</div>
+                            <h2>Ball Sports</h2>
+                            <p>Let's get the ball rolling.</p>
+                            <p><a class="btn btn-primary"
+                                    href="/products/?search=&category=ball&condition=&min_price=&max_price="
+                                    role="button">Browse ball sports</a></p>
+                        </div>
+                        <div class="col-lg-4">
+
+                            <div style="font-size: 100px;">&#127992</div>
+
+                            <h2>Racket Sports</h2>
+                            <p>These rackets won't swing themselves.</p>
+                            <p><a class="btn btn-primary"
+                                    href="/products/?search=&category=racket&condition=&min_price=&max_price="
+                                    role="button">Browse racket sports</a></p>
+                        </div>
+                        <div class="col-lg-4">
+
+                            <div style="font-size: 100px;">&#127947</div>
+
+                            <h2>Fitness Equipment</h2>
+                            <p>What season is it? Bulking season.</p>
+                            <p><a class="btn btn-primary"
+                                    href="/products/?search=&category=fitness&condition=&min_price=&max_price="
+                                    role="button">Browse fitness equipment</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div style="font-size: 100px;">&#127923</div>
+                            <h2>Indoor Sports</h2>
+                            <p>I ain't going outside today (but maybe tomorrow).</p>
+                            <p><a class="btn btn-primary"
+                                    href="/products/?search=&category=indoor&condition=&min_price=&max_price="
+                                    role="button">Browse indoor sports</a></p>
+                        </div>
+                        <div class="col-lg-4">
+                            <div style="font-size: 100px;">&#129343</div>
+                            <h2>Water Sports</h2>
+                            <p>Drip too hard.</p>
+                            <p><a class="btn btn-primary"
+                                    href="/products/?search=&category=water&condition=&min_price=&max_price="
+                                    role="button">Browse water sports</a></p>
+                        </div>
+                        <div class="col-lg-4">
+                            <div style="font-size: 100px;">&#127938</div>
+                            <h2>Winter Sports</h2>
+                            <p>Time to get iced out.</p>
+                            <p><a class="btn btn-primary"
+                                    href="/products/?search=&category=winter&condition=&min_price=&max_price="
+                                    role="button">Browse winter sports</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#marketingCarousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#marketingCarousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">If you can play a sport with it</h2>
+            <p class="lead">you can borrow it at A17.</p>
+            <span class="text-muted"> Join our our amazing community at A17 Sports today and get immediate
+                access
+                to a world-class range of sports equipment. </span>
+
+        </div>
+        <div class="col-md-5">
+            <div style="font-size: 100px;">&#127940</div>
+
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Level up and join the team
+            </h2>
+            <span class="text-muted">Filter listings to find equipment for your favorite sports, or branch out and try
+                something
+                new!</span>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <div style="font-size: 100px;">&#127955</div>
+
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+
+    </div>
+
+
+    </main>
+
+
+</body>
+
+<style>
+    .a17-header h1 {
+        font-size: 4em;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+        color: #333;
+        letter-spacing: 3px;
+    }
+
+    .a17-header h2 {
+        font-size: 1.5em;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+        font-style: italic;
+    }
+
+    .marketing-carousel-wrapper {
+        position: relative;
+        overflow: hidden;
+        padding: 0 40px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.3);
+        width: 40px;
+        height: 40px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel-control-prev {
+        left: 0;
+        transform: translate(-100%, -50%);
+    }
+
+    .carousel-control-next {
+        right: 0;
+        transform: translate(100%, -50%);
+    }
+</style>
+
+{% endblock %}

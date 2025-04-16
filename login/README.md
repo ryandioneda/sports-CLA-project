@@ -1,0 +1,1 @@
+App that contains logic for authentication / login information / accounts

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Borrow Requests</h1>
+    <ul>
+    {% for borrow_request in object_list %}
+        <p> {{borrow_request.user.first_name}} 
+            {{borrow_request.user.last_name}} 
+            ({{ borrow_request.user.email}}) 
+            requested 
+            <a href="{% url 'products:product_detail' borrow_request.equipment.id %}">{{borrow_request.equipment.name}}</a>
+            on {{ borrow_request.timestamp}}
+
+            {% if borrow_request.equipment.status == 'available' %}
+            <a href="{% url 'products:product_rent' borrow_request.id%}" class="btn btn-outline-secondary">
+                <i class=""></i>Approve
+            </a>
+            {% else %}
+            Unavailable
+            {% endif %}
+            <a href="{% url 'products:product_deny' borrow_request.id%}" class="btn btn-outline-secondary">
+                <i class=""></i>Deny
+            </a>
+        </p>
+    {% endfor %}
+    </ul>
+{% endblock %}

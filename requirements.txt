@@ -1,0 +1,17 @@
+gunicorn
+django-allauth
+requests
+PyJWT
+python-dotenv
+asgiref==3.8.1
+Django
+django-bootstrap5==24.3
+gunicorn==23.0.0
+packaging==24.2
+sqlparse==0.5.3
+cryptography
+dj-database-url
+whitenoise
+psycopg2
+django-storages
+boto3

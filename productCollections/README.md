@@ -1,0 +1,1 @@
+App to manage (add, edit, delete, create) collections for products

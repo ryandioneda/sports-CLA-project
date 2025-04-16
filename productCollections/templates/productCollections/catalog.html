@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">My Collections</h1>
+
+    <!-- Filter Form -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-12">
+                    {{ form.search }}
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                    <a href="{% url 'productCollections:my_collections' %}" class="btn btn-secondary">Clear Filters</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Collections List -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for collection in collection_list %}
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ collection.collection_name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ collection.collection_description }}</h6>
+                    <p class="card-text">Created by: {{ collection.owner.username }}</p>
+                    <p class="card-text">{{ collection.collection_privacy }}</p>
+                    <ul class="list-unstyled">
+                        <li><strong>the private user list:</strong>
+                            {% for user in collection.collection_private_userlist.all %}
+                            {{ user.email }}{% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                            (None)
+                            {% endfor %}
+                        </li>
+                    </ul>
+                    <a href="{% url 'productCollections:edit_collection' collection.id %}" class="btn btn-primary">Edit Collection</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">No collections found matching your criteria.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

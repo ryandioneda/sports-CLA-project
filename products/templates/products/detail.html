@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted small">Product ID: {{ equipment.id }}</span>
+                    </div>
+                    <h2 class="card-title text-primary fw-bold">{{ equipment.name }}</h2>
+                    <h5 class="text-muted">{{ equipment.brand }}</h5>
+                    <p class="card-text mt-3">{{ equipment.location }}</p>
+                    <p class="card-text mt-3">{{ equipment.description }}</p>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Category:</strong>
+                            <span class="badge bg-info text-dark">{{ equipment.get_category_display }}</span>
+                        </li>
+                        <li class="list-group-item"><strong>Condition:</strong>
+                            <span class="badge bg-success">{{ equipment.get_condition_display }}</span>
+                        </li>
+
+                        <li class="list-group-item"><strong>Status:</strong>
+                            <span class="badge bg-success">{{ equipment.get_status_display }}</span>
+                        </li>
+                        <li class="list-group-item"><strong>Price per day:</strong>
+                            <span class="fw-bold text-danger">${{ equipment.price_per_day }}</span>
+                        </li>
+                    </ul>
+
+                    <h3 class="mt-4">Reviews</h3>
+                    {% if reviews %}
+                    {% for review in reviews %}
+                    <div class="card my-3 p-3 border-0 shadow-sm">
+                        <h5 class="fw-bold">{{ review.user.username }}</h5>
+                        <p class="text-muted">{{ review.created_at }}</p>
+                        <p>{{ review.text }}</p>
+
+                        {% if review.user == request.user %}
+                        <a href="{% url 'products:product_review_update' equipment.id %}"
+                            class="btn btn-outline-secondary">
+                            <i class=""></i> Edit
+                        </a>
+                        {% endif %}
+
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p class="text-muted">No reviews yet. Be the first to review this product!</p>
+                    {% endif %}
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'products:product_catalog' %}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> Back to Catalog
+                        </a>
+                    </div>
+                    {% if perms.login.lender_perms or perms.login.borrower_perms %}
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'products:product_review' equipment.id %}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-right"></i> Post a Review
+                        </a>
+                    </div>
+                    {% endif %}
+
+
+                    <div>
+                        <li class="list-group-item">
+                            <strong>Collections:</strong>
+                            {% if equipment.collections.all %}
+                            <select class="form-select mt-2" aria-label="Collections">
+                                {% for collection in equipment.collections.all %}
+                                <option>{{ collection.collection_name }}</option>
+                                {% endfor %}
+                            </select>
+                            {% else %}
+                            <p class="text-muted mt-2">No collections assigned.</p>
+                            {% endif %}
+                        </li>
+                    </div>
+
+                    {%if perms.login.borrower_perms %}
+                        {%if requested%}
+                            <p class="text-muted">Request Pending</p>
+                        {%else%}
+                            <a href="{% url 'products:request_product' equipment.id %}" class="btn btn-outline-secondary">
+                                <i class=""></i>Request to Borrow
+                            </a>
+                        {%endif%}
+                    {% endif %}
+
+
+                    {%if perms.login.lender_perms %}
+                    <a href="{% url 'products:manage_requests' %}" class="btn btn-outline-secondary">
+                        <i class=""></i>Manage Product Borrow Requests
+                    </a>
+                    {% endif %}
+
+                    {% if perms.login.lender_perms %}
+                    <div class="d-flex justify-content-start mt-4">
+                        <a href="{% url 'products:edit_equipment' equipment.id %}" class="btn btn-primary">
+                            <i></i> Edit
+                        </a>
+                        <form action="{% url 'products:delete_product' equipment.id %}" method="POST"
+                            onsubmit="return confirm('Are you sure you want to delete this product?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">
+                                <i></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

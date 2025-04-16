@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">My Products</h1>
+
+    <!-- My product list -->
+     <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for equipment in equipment_list %}
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ equipment.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ equipment.brand }}</h6>
+                    <p class="card-text">{{ equipment.location }}</p>
+                    <p class="card-text">{{ equipment.description }}</p>
+                    {% if equipment.image %}
+                    <img src="{{equipment.image.url}}" class="card-img-top">
+                    {% endif %}
+                    <ul class="list-unstyled">
+                        <li><strong>Category:</strong> {{ equipment.get_category_display }}</li>
+                        <li><strong>Condition:</strong> {{ equipment.get_condition_display }}</li>
+                        <li><strong>Price per day:</strong> ${{ equipment.price_per_day }}</li>
+                    </ul>
+                    <a href="{% url 'products:product_requests' equipment.id %}">View Requests</a>
+                </div>
+            </div>
+
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">You own no products</p>
+        </div>
+        {% endfor %}
+     </div>
+</div>
+
+{% endblock %}

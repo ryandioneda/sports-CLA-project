@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'login/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div>
+    {% if not user.is_authenticated %}
+    <h1>Ready to start borrowing and lending with us? <i class="bi bi-dribbble"></i></h1>
+    <h2>Sign up or login with Google to get started!</h2>
+    {% else %}
+    <h1>Need to switch your account?</h1>
+    <h2>Currently logged in as {{user.email}}</h2>
+    {% endif %}
+</div>
+
+{% load socialaccount %}
+<form action="{% provider_login_url 'google' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Sign up or login <i class="bi bi-google"></i></i></button>
+</form>
+{% if user.is_authenticated %}
+<!-- <a href="/login/logout" class="btn btn-primary">Logout</a> -->
+<a href="/login/logout" class="logout-button">Logout</a>
+{% else %}
+{% endif %}
+
+
+{% endblock content %}
